@@ -5,8 +5,24 @@
 import os
 
 DATA_FILE = "data.db"
-# dictionary for storage
-store = {}
+# list for storage
+store = []
+
+# function for setting value in the list
+def set_value(key, value):
+    for pair in store:
+        if pair[0] == key:
+            pair[1] = value
+            return
+    store.append([key, value])
+
+# function for getting the value from the list
+def get_value(key):
+    for pair in store:
+        if key == pair[0]:
+            return pair[1]
+        
+    return None
 
 # function to open the data.db file
 def load_data():
@@ -30,7 +46,7 @@ def load_data():
             if command == "SET":
                 key = parts[1]
                 value = " ".join(parts[2:])   # makes value the 3rd element and everything after
-                store[key] = value
+                set_value(key,value)
 
 # function to append to the data.db file
 def append_to_file(key, value):
@@ -39,6 +55,8 @@ def append_to_file(key, value):
         file.flush()    
         os.fsync(file.fileno())    # forces the write immediately
 
+
+# main function
 def main():
 
     load_data()     # loads the data.db file
@@ -71,7 +89,7 @@ def main():
                 key = parts[1]
                 value = " ".join(parts[2:])  # allows values with spaces
                 append_to_file(key, value)   # stores data to the data file
-                store[key] = value  # stores the value in the dictionary
+                set_value(key, value)  # stores the value in the list
                 print("OK")
 
         elif command == "GET":
@@ -79,8 +97,10 @@ def main():
                 print("ERROR")
             else:
                 key = parts[1]
-                if key in store:
-                    print(store[key])
+                value = get_value(key)
+
+                if value is not None:
+                    print(value)
                 else:
                     print("NOT FOUND")
 
