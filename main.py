@@ -5,18 +5,19 @@
 # dictionary for storage
 store = {}
 
+# loops until broken
 while True:
-    user_input = input().strip()
+    user_input = input().strip()    # accepts user input
 
-    if not user_input:
+    if not user_input:  # ensures input is not null
         print("ERROR")
         continue
 
-    parts = user_input.split()
+    parts = user_input.split()  # turns the string into separate parts
 
-    command = parts[0].upper()
+    command = parts[0].upper()  # makes command upper case
 
-    if command == "EXIT":
+    if command == "EXIT":   # terminates loop
         if len(parts) == 1:
             break
         else:
@@ -28,7 +29,7 @@ while True:
         else:
             key = parts[1]
             value = " ".join(parts[2:])  # allows values with spaces
-            store[key] = value
+            store[key] = value  # stores the value in the dictionary
             print("OK")
 
     elif command == "GET":
