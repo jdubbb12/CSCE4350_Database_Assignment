@@ -95,10 +95,10 @@ def main():
                 key = parts[1]
                 value = get_value(key)
 
-                if value == None:
+                if value is None:
                     continue
                 else:
-                    return value
+                    print(value, flush=True)
 
         else:
             print("ERROR", flush=True)
