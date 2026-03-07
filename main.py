@@ -81,29 +81,29 @@ def main():
             if len(parts) == 1:
                 break
             else:
-                pass
+                print("", flush=True)
 
         elif command == "SET":
             if len(parts) < 3:
-                pass
+                print("", flush=True)
             else:
                 key = parts[1]
-                value = " ".join(parts[2:])  # allows values with spaces
+                value = parts[2]  # allows values with spaces
                 append_to_file(key, value)   # stores data to the data file
                 set_value(key, value)  # stores the value in the list
-                pass
+                print("",flush=True)
 
         elif command == "GET":
             if len(parts) != 2:
-                pass
+                print("", flush=True)
             else:
                 key = parts[1]
                 value = get_value(key)
 
                 if value is not None:
-                    print(value)
+                    print(value, flush=True)
                 else:
-                    pass
+                    print("", flush=True)
 
         else:
             print("ERROR", flush=True)
