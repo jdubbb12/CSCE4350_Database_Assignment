@@ -36,7 +36,7 @@ def load_data():
             if not line:
                 continue
 
-            parts = line.split(" ", 2)
+            parts = line.split(maxsplit=2)
 
             if len(parts) < 3:
                 continue
@@ -70,40 +70,35 @@ def main():
             break
 
         if not user_input:  # ensures input is not null
-            print("", flush=True)
             continue
 
-        parts = user_input.split(" ", 2)  # turns the string into separate parts
+        parts = user_input.split(maxsplit=2)  # turns the string into separate parts
 
         command = parts[0].upper()  # puts set, get, exit in command upper case
 
         if command == "EXIT":   # terminates loop
-            if len(parts) == 1:
-                break
-            else:
-                print("", flush=True)
+            break
 
         elif command == "SET":
             if len(parts) < 3:
-                print("", flush=True)
+                continue
             else:
                 key = parts[1]
                 value = parts[2]  # allows values with spaces
                 append_to_file(key, value)   # stores data to the data file
                 set_value(key, value)  # stores the value in the list
-                print("",flush=True)
 
         elif command == "GET":
             if len(parts) != 2:
-                print("", flush=True)
+                continue
             else:
                 key = parts[1]
                 value = get_value(key)
 
-                if value is not None:
-                    print(value, flush=True)
+                if value == None:
+                    continue
                 else:
-                    print("", flush=True)
+                    return value
 
         else:
             print("ERROR", flush=True)
