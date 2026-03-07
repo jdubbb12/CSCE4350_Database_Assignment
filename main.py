@@ -90,7 +90,6 @@ def main():
                 value = " ".join(parts[2:])  # allows values with spaces
                 append_to_file(key, value)   # stores data to the data file
                 set_value(key, value)  # stores the value in the list
-                print("OK")
 
         elif command == "GET":
             if len(parts) != 2:
@@ -102,7 +101,7 @@ def main():
                 if value is not None:
                     print(value)
                 else:
-                    print("NOT FOUND")
+                    print("")
 
         else:
             print("ERROR")
