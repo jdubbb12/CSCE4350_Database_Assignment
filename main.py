@@ -26,17 +26,17 @@ def get_value(key):
 
 # function to open the data.db file
 def load_data():
-    if not os.path.exists(DATA_FILE):
+    if not os.path.exists(DATA_FILE): # makes sure the path exists
         return
     
     with open(DATA_FILE, "r") as file:  # opens the file using os
         for line in file:
-            line = line.strip()
+            line = line.rstrip("\n")
 
             if not line:
                 continue
 
-            parts = line.split()
+            parts = line.split(" ", 2)
 
             if len(parts) < 3:
                 continue
@@ -44,8 +44,8 @@ def load_data():
             command = parts[0]
 
             if command == "SET":
-                key = parts[1]
-                value = " ".join(parts[2:])   # makes value the 3rd element and everything after
+                key = parts[1]     # makes key the 2nd element
+                value = parts[2]   # makes value the 3rd element
                 set_value(key,value)
 
 # function to append to the data.db file
@@ -64,7 +64,8 @@ def main():
     # loops until broken
     while True:
         try:
-            user_input = input().strip()    # accepts user input
+            user_input = input()   # accepts user input
+            user_input = user_input.rstrip("\n")
         except EOFError:
             break
 
@@ -72,7 +73,7 @@ def main():
             print("", flush=True)
             continue
 
-        parts = user_input.split()  # turns the string into separate parts
+        parts = user_input.split(" ", 2)  # turns the string into separate parts
 
         command = parts[0].upper()  # puts set, get, exit in command upper case
 
@@ -105,7 +106,7 @@ def main():
                     pass
 
         else:
-            pass
+            print("ERROR", flush=True)
 
 if __name__ == "__main__":
     main()
