@@ -69,7 +69,7 @@ def main():
             break
 
         if not user_input:  # ensures input is not null
-            print("ERROR")
+            print("")
             continue
 
         parts = user_input.split()  # turns the string into separate parts
@@ -80,11 +80,11 @@ def main():
             if len(parts) == 1:
                 break
             else:
-                print("ERROR")
+                print("")
 
         elif command == "SET":
             if len(parts) < 3:
-                print("ERROR")
+                print("")
             else:
                 key = parts[1]
                 value = " ".join(parts[2:])  # allows values with spaces
@@ -93,7 +93,7 @@ def main():
 
         elif command == "GET":
             if len(parts) != 2:
-                print("ERROR")
+                print("")
             else:
                 key = parts[1]
                 value = get_value(key)
